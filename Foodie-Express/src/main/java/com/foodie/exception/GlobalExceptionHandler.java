@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
 					
 	}
 
-	
+//	Customer Exception ---------------------->	
 
 	@ExceptionHandler(CustomerException.class)
 	public ResponseEntity<MyErrorInfo> myAnyExpHandler(CustomerException ie,WebRequest req){
@@ -90,6 +90,8 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
 		
 	}
+	
+//	Restaurant Exception ---------------------->
 	
 	@ExceptionHandler(RestaurantException.class)
 	public ResponseEntity<MyErrorInfo> myRestaurant(RestaurantException ie,WebRequest req){
