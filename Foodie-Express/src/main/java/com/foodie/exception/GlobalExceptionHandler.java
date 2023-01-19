@@ -91,6 +91,37 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+//<-----------------------------------------------ItemException----------------------------------------------------------------------->
+	
+	@ExceptionHandler(ItemException.class)
+	public ResponseEntity<MyErrorInfo> itemExpHandler(ItemException ie,WebRequest req){
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	//<-----------------------------------------------CategoryException----------------------------------------------------------------------->
+	
+	@ExceptionHandler(CategoryException.class)
+	public ResponseEntity<MyErrorInfo> CategoryExpHandler(CategoryException ie,WebRequest req){
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
 	
 	
 
