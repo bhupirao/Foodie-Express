@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
 					
 	}
 
-	
+//	Customer Exception ---------------------->	
 
 	@ExceptionHandler(CustomerException.class)
 	public ResponseEntity<MyErrorInfo> myAnyExpHandler(CustomerException ie,WebRequest req){
@@ -91,10 +91,14 @@ public class GlobalExceptionHandler {
 		
 	}
 	
-//<-----------------------------------------------ItemException----------------------------------------------------------------------->
-	
-	@ExceptionHandler(ItemException.class)
-	public ResponseEntity<MyErrorInfo> itemExpHandler(ItemException ie,WebRequest req){
+
+
+
+	//Bill Exception..............
+	@ExceptionHandler(BillException.class)
+	public ResponseEntity<MyErrorInfo> myAnyExpHandler(BillException ie,WebRequest req){
+
+
 		
 		
 		MyErrorInfo err = new MyErrorInfo();
@@ -107,6 +111,7 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+
 	//<-----------------------------------------------CategoryException----------------------------------------------------------------------->
 	
 	@ExceptionHandler(CategoryException.class)
@@ -122,6 +127,8 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
 		
 	}
+
+
 	
 	
 
