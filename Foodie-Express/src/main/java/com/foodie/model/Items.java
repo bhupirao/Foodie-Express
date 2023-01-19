@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +25,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Items {
-	
-	
 	
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,12 +41,13 @@ public class Items {
 		@NotNull
 		private Integer costPerUnit;
 		
-		@OneToOne
+		@OneToOne(cascade = CascadeType.ALL)
 		@Size(min = 3, max = 10, message = "Category name should 3 to 20")
 		private Category category;
 		
-//		@ManyToMany(cascade = CascadeType.ALL)
-//		private List<Restaurant> listOfRestaurants = new ArrayList<>();
+		
+		@ManyToMany(cascade = CascadeType.ALL)
+		private List<Restaurant> listOfRestaurants = new ArrayList<>();
 		
 
 
