@@ -1,5 +1,6 @@
 package com.foodie.model;
 
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,4 +39,8 @@ public class Restaurant {
 //	private List<Item> itemList = new ArrayList<>();
 	
 		
+
+public class Restaurant {
+
+
 }

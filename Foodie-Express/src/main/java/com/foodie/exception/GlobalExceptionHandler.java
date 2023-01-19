@@ -91,10 +91,16 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+
 //	Restaurant Exception ---------------------->
 	
 	@ExceptionHandler(RestaurantException.class)
 	public ResponseEntity<MyErrorInfo> myRestaurant(RestaurantException ie,WebRequest req){
+=======
+	//Bill Exception..............
+	@ExceptionHandler(BillException.class)
+	public ResponseEntity<MyErrorInfo> myAnyExpHandler(BillException ie,WebRequest req){
+
 		
 		
 		MyErrorInfo err = new MyErrorInfo();
