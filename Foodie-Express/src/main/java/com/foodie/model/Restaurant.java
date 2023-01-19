@@ -1,12 +1,22 @@
 package com.foodie.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,11 +42,12 @@ public class Restaurant {
 	private String contactNumber;
 	
 	@NotNull(message = "Restaurant Address is Mandatory ")
-	@Embedded
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address; 
 	
-//	@ManyToMany
-//	private List<Item> itemList = new ArrayList<>();
+	//@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL , mappedBy = "listOfRestaurants")
+	private List<Items> itemList = new ArrayList<>();
 	
 		
 

@@ -2,10 +2,12 @@ package com.foodie.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +29,6 @@ public class Bill {
 
 	private Double totalCost;
 
-//	@ManyToOne
-//	@JoinColumn(name = "cusId")
-//	private User customer;
+    @OneToOne(cascade = CascadeType.ALL)
+	private OrderDetails order;
 }
