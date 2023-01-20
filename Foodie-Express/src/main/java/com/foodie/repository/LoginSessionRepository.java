@@ -9,6 +9,7 @@ import com.foodie.model.LoginSession;
 public interface LoginSessionRepository extends JpaRepository<LoginSession, Integer>{
 	
 	public LoginSession findByUuid(String uuid);
-	
+
+
 
 }
