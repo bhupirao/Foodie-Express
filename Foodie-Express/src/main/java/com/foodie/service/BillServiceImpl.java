@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodie.exception.BillException;
 import com.foodie.model.Bill;
+
 import com.foodie.model.Customer;
 import com.foodie.model.Items;
 import com.foodie.model.LoginSession;
@@ -17,6 +18,9 @@ import com.foodie.repository.BillRepository;
 import com.foodie.repository.CustomerRepository;
 import com.foodie.repository.LoginSessionRepository;
 import com.foodie.repository.OrderRepository;
+
+import com.foodie.repository.BillRepository;
+
 
 @Service
 public class BillServiceImpl implements BillService{
@@ -35,7 +39,11 @@ public class BillServiceImpl implements BillService{
 
 	
 
+	@Autowired
+	private BillRepository billRepository;
+	
 	@Override
+
 	public Bill addBill(Integer orderId , String uniqueId) throws BillException {
 		
 		LoginSession cs = cSDao.findByUuid(uniqueId);
@@ -73,10 +81,10 @@ public class BillServiceImpl implements BillService{
 		}
 		
 		
-	}
 
 	@Override
 	public Bill removeBill(Bill bill) throws BillException {
+
 	
 		Optional<Bill> opt = bDao.findById(bill.getBillid());
 
@@ -88,10 +96,15 @@ public class BillServiceImpl implements BillService{
 		}
 
 		return bill;
+
+		
+		
+
 	}
 
 	@Override
 	public Bill updateBill(Bill bill) throws BillException {
+
 		
 		Optional<Bill> opt = bDao.findById(bill.getBillid());
 		Bill uBill = null;
@@ -103,6 +116,12 @@ public class BillServiceImpl implements BillService{
 		}
 
 		return uBill;
+
+		
+		
+	
+		
+
 	}
 
 	@Override
