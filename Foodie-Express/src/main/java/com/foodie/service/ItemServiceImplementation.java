@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.foodie.exception.ItemException;
 import com.foodie.model.Category;
 import com.foodie.model.Items;
 import com.foodie.repository.ItemRepository;
 
+@Service
 public class ItemServiceImplementation implements ItemService{
 	
 	@Autowired
