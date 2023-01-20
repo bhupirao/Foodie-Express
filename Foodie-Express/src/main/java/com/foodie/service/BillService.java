@@ -8,7 +8,7 @@ import com.foodie.model.Bill;
 
 public interface BillService {
 
-	public Bill addBill(Integer orderId) throws BillException;
+	public Bill addBill(Integer orderId , String uniqueId) throws BillException;
 
 	public Bill removeBill(Bill bill) throws BillException;
 
