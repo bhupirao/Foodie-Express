@@ -1,6 +1,6 @@
 package com.foodie.exception;
 
-public class ItemException extends Exception {
+public class ItemException extends RuntimeException {
 
 	public ItemException() {
 		super();

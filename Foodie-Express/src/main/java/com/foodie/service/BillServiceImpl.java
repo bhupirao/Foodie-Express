@@ -3,31 +3,36 @@ package com.foodie.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodie.exception.BillException;
 import com.foodie.model.Bill;
+import com.foodie.repository.BillRepository;
 
 @Service
 public class BillServiceImpl implements BillService{
 
+	@Autowired
+	private BillRepository billRepository;
+	
 	@Override
 	public Bill addBill(Integer orderId) throws BillException {
-		
-		
-		
+	
 		return null;
 	}
 
 	@Override
 	public Bill removeBill(Bill bill) throws BillException {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public Bill updateBill(Bill bill) throws BillException {
 		// TODO Auto-generated method stub
+		
+	
 		return null;
 	}
 
