@@ -22,8 +22,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Items {
 	
 		@Id
@@ -48,6 +48,113 @@ public class Items {
 		
 		@ManyToMany(cascade = CascadeType.ALL)
 		private List<Restaurant> listOfRestaurants = new ArrayList<>();
+		
+		
+		
+		public Items() {
+			// TODO Auto-generated constructor stub
+		}
+
+
+
+		public Items(@NotNull @Size(min = 3, max = 10, message = "Item Name  should 3 to 20") String itemName,
+				@NotNull @Size(min = 1, message = "Quantity should not be zero.") Integer quantity,
+				@NotNull Integer costPerUnit,
+				@Size(min = 3, max = 10, message = "Category name should 3 to 20") Category category,
+				List<Restaurant> listOfRestaurants) {
+			super();
+			this.itemName = itemName;
+			this.quantity = quantity;
+			this.costPerUnit = costPerUnit;
+			this.category = category;
+			this.listOfRestaurants = listOfRestaurants;
+		}
+
+
+
+		public Integer getItemId() {
+			return itemId;
+		}
+
+
+
+		public void setItemId(Integer itemId) {
+			this.itemId = itemId;
+		}
+
+
+
+		public String getItemName() {
+			return itemName;
+		}
+
+
+
+		public void setItemName(String itemName) {
+			this.itemName = itemName;
+		}
+
+
+
+		public Integer getQuantity() {
+			return quantity;
+		}
+
+
+
+		public void setQuantity(Integer quantity) {
+			this.quantity = quantity;
+		}
+
+
+
+		public Integer getCostPerUnit() {
+			return costPerUnit;
+		}
+
+
+
+		public void setCostPerUnit(Integer costPerUnit) {
+			this.costPerUnit = costPerUnit;
+		}
+
+
+
+		public Category getCategory() {
+			return category;
+		}
+
+
+
+		public void setCategory(Category category) {
+			this.category = category;
+		}
+
+
+
+		public List<Restaurant> getListOfRestaurants() {
+			return listOfRestaurants;
+		}
+
+
+
+		public void setListOfRestaurants(List<Restaurant> listOfRestaurants) {
+			this.listOfRestaurants = listOfRestaurants;
+		}
+
+
+
+		@Override
+		public String toString() {
+			return "Items [itemId=" + itemId + ", itemName=" + itemName + ", quantity=" + quantity + ", costPerUnit="
+					+ costPerUnit + ", category=" + category + ", listOfRestaurants=" + listOfRestaurants + "]";
+		}
+		
+		
+		
+		
+		
+		
 		
 
 
