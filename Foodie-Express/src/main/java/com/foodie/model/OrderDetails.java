@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,7 @@ public class OrderDetails {
 	@Size(min = 3, max = 10, message = "Order Status should 3 to 10")
 	private OrderStatus orderstatus;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	public FoodCart cart;
 	

@@ -127,6 +127,24 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	
+	
+	//--------------------------------------OrderException-------------------------------------------------------------//
+	
+	@ExceptionHandler(OrderException.class)
+	public ResponseEntity<MyErrorInfo> CategoryExpHandler(OrderException ie,WebRequest req){
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
 
 
 	
