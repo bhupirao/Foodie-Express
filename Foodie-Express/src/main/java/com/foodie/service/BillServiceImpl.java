@@ -55,7 +55,7 @@ public class BillServiceImpl implements BillService{
 				Customer customerDetails = optC.get();
 				Bill bill = new Bill();
 				
-				bill.setTime(orderDetails.getOrderDate());
+				bill.setBillDate(orderDetails.getOrderDate());
 				//bill.setCAddress(customerDetails.getAddress());
 				//bill.setCustomerName(customerDetails.getFirstName() + " " + customerDetails.getLastName());
 
@@ -79,23 +79,25 @@ public class BillServiceImpl implements BillService{
 		} else {
 			throw new BillException("Customer is not logged in");
 		}
-		
+	}	
 		
 
 	@Override
-	public Bill removeBill(Bill bill) throws BillException {
+	public Bill removeBill(Integer BillId) throws BillException {
 
 	
-		Optional<Bill> opt = bDao.findById(bill.getBillid());
+		Optional<Bill> opt = bDao.findById(BillId);
 
 		if (opt.isPresent()) {
-			bDao.delete(bill);
+			bDao.deleteById(BillId);
+			
+			return opt.get();
 
 		} else {
-			throw new BillException("No bill found by " + bill.getBillid() + " id");
+			throw new BillException("No bill found by ");
 		}
 
-		return bill;
+		
 
 		
 		
@@ -117,27 +119,22 @@ public class BillServiceImpl implements BillService{
 
 		return uBill;
 
-		
-		
-	
-		
-
 	}
+	
+	
 
 	@Override
-	public Bill viewBill(Bill bill) throws BillException {
+	public Bill viewBill(Integer BillId) throws BillException {
 		
-		Optional<Bill> opt = bDao.findById(bill.getBillid());
-		Bill existingBill = null;
-		if (opt.isPresent()) {
-
-			existingBill = opt.get();
-
-		} else {
-			throw new BillException("No bill found by " + bill.getBillid() + " id");
-		}
-
-		return existingBill;
+		Optional<Bill> opt = bDao.findById(BillId);
+		 if(opt.isPresent()) { 
+			 Bill existingBill = opt.get();
+			
+			 return existingBill;
+			 
+		 }else { 
+			 throw new BillException("Bill does not exist with billId: "+ BillId);
+		 }
 	}
 
 	@Override
@@ -149,13 +146,25 @@ public class BillServiceImpl implements BillService{
 	@Override
 	public List<Bill> viewBills(LocalDate startDate, LocalDate endDate) throws BillException {
 	
-		return null;
+		List<Bill> bills = bDao.viewBillsByDates(startDate,endDate);
+		 if(bills.isEmpty()) { 
+			 throw new BillException("Bills not found between date: "+ startDate +""+ endDate);
+		 }
+		return bills;
 	}
 
 	@Override
-	public double calculateTotalCost(Bill bill) throws BillException {
+	public double calculateTotalCost(Integer billId) throws BillException {
 		
-		return 0;
+		Optional<Bill> opt = bDao.findById(billId);
+		 if(opt.isPresent()) { 
+			 Bill existingBill = opt.get();
+			 Double totalamount = existingBill.getTotalCost();
+			 return totalamount;
+			 
+		 }else { 
+			 throw new BillException("invalid bill details.");
+		 }
 	}
 
 	
