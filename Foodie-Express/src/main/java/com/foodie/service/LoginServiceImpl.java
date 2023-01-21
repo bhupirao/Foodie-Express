@@ -60,7 +60,7 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public String signOut(Login login, String key) throws LoginException {
+	public String signOut( String key) throws LoginException {
 		
 		 LoginSession validUserSession = loginSessionRepository.findByUuid(key);
 
