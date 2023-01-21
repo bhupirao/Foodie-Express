@@ -7,5 +7,7 @@ import com.foodie.model.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+	
+	
 
 }

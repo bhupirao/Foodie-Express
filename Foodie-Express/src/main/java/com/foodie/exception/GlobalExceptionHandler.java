@@ -127,7 +127,60 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	
+	
+	//--------------------------------------OrderException-------------------------------------------------------------//
+	
+	@ExceptionHandler(OrderException.class)
+	public ResponseEntity<MyErrorInfo> CategoryExpHandler(OrderException ie,WebRequest req){
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
 
+//	<----------------------------------------------------------FoodCart----------------------------------->
+	
+	@ExceptionHandler(FoodCartException.class)
+	public ResponseEntity<MyErrorInfo> myFoodCartExpExpHandler(FoodCartException ie,WebRequest req){
+
+
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+//	<----------------------------------------------------------Login----------------------------------->
+	
+	@ExceptionHandler(LoginException.class)
+	public ResponseEntity<MyErrorInfo> myLoginExpExpHandler(LoginException ie,WebRequest req){
+
+
+		
+		
+		MyErrorInfo err = new MyErrorInfo();
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(ie.getMessage());
+		err.setDetails(req.getDescription(false));
+		
+		
+		return new ResponseEntity<MyErrorInfo>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
 
 	
 	

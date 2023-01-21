@@ -8,11 +8,13 @@ import com.foodie.model.LoginDTO;
 
 public interface LoginService {
 
-	public Login signIn(LoginDTO loginDto)throws LoginException;
+	public String signIn(LoginDTO loginDto)throws LoginException;
 	
-	public  Login signOut(Login login,String key)throws LoginException;
+    public  String signOut(Login login,String key)throws LoginException;
 	
-	public String  createUser(Login login)throws LoginException;
+	public Login  createUser(Login login)throws LoginException;
 	
-	public String  updateUser(Login login,String key)throws LoginException;
+	public Login  updateUser(Login login,String key)throws LoginException;
+	
+	
 }
