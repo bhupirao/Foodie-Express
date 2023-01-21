@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Customer {
 	
 	@Id
@@ -49,7 +49,7 @@ public class Customer {
 
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Customer(Integer customerId, String firstName, String lastName, Integer age, String gender,

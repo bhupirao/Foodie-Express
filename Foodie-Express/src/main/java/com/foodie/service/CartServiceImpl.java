@@ -27,27 +27,7 @@ public class CartServiceImpl implements CartService{
 	public FoodCart addItemToCart(FoodCart cart, Items item) throws FoodCartException, ItemException {
 		
 		
-		Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
-		
-		if(foodCart!=null) {
-
-			Optional<Items> items=itemRepository.findById(item.getItemId());
-			
-			if(items!=null) {
-				
-				List<Items> li=new ArrayList<>();
-				
-				li.add(item);
-				
-				cart.setItemList(li);
-				
-				return foodCartRepository.save(cart);
-			}else {
-				throw new ItemException("Item not added");
-			}
-		}
-		
-		throw new FoodCartException("Cart Not added");
+		return null;
 		
 	}
 

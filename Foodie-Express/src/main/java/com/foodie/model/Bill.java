@@ -23,7 +23,7 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer billid;
 
-	private LocalDateTime time;
+	private LocalDateTime billDate;
 
 	private Integer totalitems;
 
