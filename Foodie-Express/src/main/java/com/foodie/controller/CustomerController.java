@@ -1,5 +1,14 @@
 package com.foodie.controller;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.foodie.service.CategoryService;
+
+public class CustomerController {
+	
+	
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -73,5 +82,6 @@ public class CustomerController {
 		return new ResponseEntity<>(customerList, HttpStatus.ACCEPTED);
 		
 	}
+
 
 }

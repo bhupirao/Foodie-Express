@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -40,7 +42,8 @@ public class Items {
 //		@NotNull
 		private Integer costPerUnit;
 		
-		@OneToOne(cascade = CascadeType.ALL)
+		@JsonIgnore
+		@ManyToOne
 //		@Size(min = 3, max = 10, message = "Category name should 3 to 20")
 		private Category category;
 
