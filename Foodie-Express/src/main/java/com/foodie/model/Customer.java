@@ -43,6 +43,7 @@ public class Customer {
 	private String email;
 	
 //	@NotNull(message = "Customer First Name is Mandatory ")
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	

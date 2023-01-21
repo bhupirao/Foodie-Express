@@ -43,7 +43,7 @@ public class Items {
 		@OneToOne(cascade = CascadeType.ALL)
 //		@Size(min = 3, max = 10, message = "Category name should 3 to 20")
 		private Category category;
-		
+
 		@JsonIgnore
 		@ManyToMany(cascade = CascadeType.ALL)
 		private List<Restaurant> listOfRestaurants = new ArrayList<>();
