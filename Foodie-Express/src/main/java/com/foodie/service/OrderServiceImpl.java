@@ -63,18 +63,18 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public OrderDetails removeOrder(OrderDetails order) throws OrderException {
+	public OrderDetails removeOrder(Integer orderId) throws OrderException {
 		
-		Optional<OrderDetails> opt = orderRepo.findById(order.getOrderId());
+		Optional<OrderDetails> opt = orderRepo.findById(orderId);
 
 		if (opt.isPresent()) {
-		      orderRepo.delete(opt.get());
-
+		      orderRepo.deleteById(orderId);;
+		      return opt.get();
 		} else {
-			throw new OrderException("No order found by this order " + order.getOrderId() + " id");
+			throw new OrderException("No order found by this order ");
 		}
 
-		return order;
+		
 		
 		
 	}
@@ -98,28 +98,28 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public OrderDetails viewOrder(OrderDetails order) throws OrderException {
+	public OrderDetails viewOrder(Integer orderId) throws OrderException {
 		
-		Optional<OrderDetails> opt = orderRepo.findById(order.getOrderId());
+		Optional<OrderDetails> opt = orderRepo.findById(orderId);
 		OrderDetails exitstingOrder = null;
 		if (opt.isPresent()) {
 			exitstingOrder = opt.get();
 
 		} else {
-			throw new OrderException("No order found by this order " + order.getOrderId() + " id");
+			throw new OrderException("No order found by this order " + orderId + " id");
 		}
 
 		return exitstingOrder;
 	}
 
 	@Override
-	public List<OrderDetails> viewAllOrders(Restaurant res) throws OrderException {
+	public List<OrderDetails> viewAllOrdersbyRestaurant(Restaurant res) throws OrderException {
 		
-		return null;
+          return null;
 	}
 
 	@Override
-	public List<OrderDetails> viewAllOrders(Customer customer) throws OrderException {
+	public List<OrderDetails> viewAllOrdersbycustomer(Customer customer) throws OrderException {
 		
 		return null;
 	}

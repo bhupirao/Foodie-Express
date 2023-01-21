@@ -12,14 +12,14 @@ public interface OrderService {
 
 	public OrderDetails addOrder(Integer cartId, String uniqueId) throws OrderException ,FoodCartException;
 
-	public OrderDetails removeOrder(OrderDetails order) throws OrderException;
+	public OrderDetails removeOrder(Integer orderId) throws OrderException;
 
 	public OrderDetails updateOrder(OrderDetails order) throws OrderException;
 
-	public OrderDetails viewOrder(OrderDetails order) throws OrderException;
+	public OrderDetails viewOrder(Integer orderId) throws OrderException;
 
-	public List<OrderDetails> viewAllOrders(Restaurant res) throws OrderException;
+	public List<OrderDetails> viewAllOrdersbyRestaurant(Restaurant res) throws OrderException;
 
-	public List<OrderDetails> viewAllOrders(Customer customer) throws OrderException;
+	public List<OrderDetails> viewAllOrdersbycustomer(Customer customer) throws OrderException;
 
 }
