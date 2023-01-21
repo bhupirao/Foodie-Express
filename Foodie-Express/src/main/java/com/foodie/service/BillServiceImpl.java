@@ -69,6 +69,7 @@ public class BillServiceImpl implements BillService{
 				bill.setTotalCost(totalCost);
 
 				bill.setTotalitems(totalItem);
+				bill.setOrder(orderDetails);
 
 				bDao.save(bill);
 				return bill;
@@ -79,6 +80,7 @@ public class BillServiceImpl implements BillService{
 		} else {
 			throw new BillException("Customer is not logged in");
 		}
+	}
 		
 		
 

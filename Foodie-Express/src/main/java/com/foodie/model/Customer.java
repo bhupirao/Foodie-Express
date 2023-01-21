@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,18 +44,23 @@ public class Customer {
 	
 //	@NotNull(message = "Customer First Name is Mandatory ")
 	@OneToOne(cascade = CascadeType.ALL)
-	@Autowired
 	private Address address;
-
+	
+	
+	
 	public Customer() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public Customer(Integer customerId, String firstName, String lastName, Integer age, String gender,
-			String mobileNumber, String email, Address address) {
+	
+
+
+
+	public Customer(String firstName, String lastName, Integer age, String gender, String mobileNumber, String email,
+			Address address) {
 		super();
-		this.customerId = customerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -64,6 +69,8 @@ public class Customer {
 		this.email = email;
 		this.address = address;
 	}
+
+
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -129,12 +136,15 @@ public class Customer {
 		this.address = address;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", age="
 				+ age + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", email=" + email + ", address="
 				+ address + "]";
 	}
+	
 	
 	
 	
