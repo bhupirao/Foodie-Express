@@ -1,6 +1,5 @@
 package com.foodie.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,102 +74,97 @@ public class CartServiceImpl implements CartService{
 	public FoodCart increaseQuantity(FoodCart cart, Items item, Integer quantity) throws FoodCartException, ItemException {
 		
 
-Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
+          Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
-		if(foodCart!=null) {
-
-			Optional<Items> items=itemRepository.findById(item.getItemId());
-			
-			if(items!=null) {
-				
-				List<Items> li=new ArrayList<>();
-				for(int i=0;i<li.size();i++) {
-					if(i==item.getItemId()) {
-						item.setQuantity(item.getQuantity()+quantity);
-						
-						
-					}
+		if(foodCart.isPresent()) {
+			cart=foodCart.get();
+			List<Items> itemList = cart.getItemList();
+			boolean flag = true;
+			for (int i = 0; i < itemList.size(); i++) {
+				Items ele = itemList.get(i);
+				if (ele.getItemId() == item.getItemId()) {
+					ele.setQuantity(ele.getQuantity() + quantity);
+					flag = false;
 				}
-				li.add(item);
-				
-				cart.setItemList(li);
-	
-				return foodCartRepository.save(cart);
-				
-			}else {
-				throw new ItemException("Item Quantity not added");
 			}
+			if (flag)
+				throw new ItemException("Item not found!");
+			else {
+
+				cart.setItemList(itemList);
+				foodCartRepository.save(cart);
+				return cart;
+			}
+
+		}else {
+			throw new FoodCartException("Food Cart not found!");
 		}
-		
-		throw new FoodCartException("Cart Not added");
 	}
 
 	@Override
 	public FoodCart reduceQunatity(FoodCart cart, Items item, Integer quantity) throws FoodCartException, ItemException {
 		
 
-Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
+         
+        Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
-		if(foodCart!=null) {
-
-			Optional<Items> items=itemRepository.findById(item.getItemId());
-			
-			if(items!=null) {
-				
-				List<Items> li=new ArrayList<>();
-				for(int i=0;i<li.size();i++) {
-					if(i==item.getItemId()) {
-						item.setQuantity(item.getQuantity()-quantity);
-						
-						
-					}
+		if(foodCart.isPresent()) {
+			cart=foodCart.get();
+			List<Items> itemList = cart.getItemList();
+			boolean flag = true;
+			for (int i = 0; i < itemList.size(); i++) {
+				Items ele = itemList.get(i);
+				if (ele.getItemId() == item.getItemId()) {
+					ele.setQuantity(ele.getQuantity() - quantity);
+					flag = false;
 				}
-				li.add(item);
-				
-				cart.setItemList(li);
-	
-				return foodCartRepository.save(cart);
-				
-			}else {
-				throw new ItemException("Item Quantity not remove");
 			}
+			if (flag)
+				throw new ItemException("Item not found!");
+			else {
+
+				cart.setItemList(itemList);
+				foodCartRepository.save(cart);
+				return cart;
+			}
+
+		}else {
+			throw new FoodCartException("Food Cart not found!");
 		}
-		
-		throw new FoodCartException("Cart Not added");
 	}
 
 	@Override
 	public FoodCart removeItem(FoodCart cart, Items item) throws FoodCartException, ItemException {
 		
-		Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
-		
-		
-		if(foodCart!=null) {
+		Optional<FoodCart> opt=foodCartRepository.findById(cart.getCartId());
+		if (opt.isPresent()) {
+			 cart = opt.get();
 
-			Optional<Items> items=itemRepository.findById(item.getItemId());
-			
-			if(items!=null) {
-				List<Items> li=new ArrayList<>();
-				for(int i=0;i<li.size();i++) {
-					if(i==item.getItemId()) {
-						itemRepository.delete(item);
-						
-						
-					}
+			List<Items> itemList = cart.getItemList();
+
+			boolean flag = true;
+			Items getItem = null;
+
+			for (int i = 0; i < itemList.size(); i++) {
+				Items ele = itemList.get(i);
+				if (ele.getItemId() == item.getItemId()) {
+					flag = false;
+					getItem = ele;
 				}
-			
-				
-			
-			
-				return foodCartRepository.save(cart);
-				
-				
-			}else {
-				throw new ItemException("Item Quantity not remove");
 			}
+			if (flag)
+				throw new ItemException("Item not found!");
+			else {
+				itemList.remove(getItem);
+				cart.setItemList(itemList);
+				foodCartRepository.save(cart);
+				return cart;
+			}
+		} else {
+			throw new FoodCartException("Food Cart not found!");
 		}
 		
-		throw new FoodCartException("Cart Not added");
+		
 	}
 
 	@Override
@@ -178,11 +172,13 @@ Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
 		Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
-		if(foodCart!=null) {
-			foodCartRepository.delete(cart);
-			return cart;
+		if(foodCart.isPresent()) {
+			cart=foodCart.get();
+			cart.getItemList().clear();
+			return foodCartRepository.save(cart);
+			 
 		}
-		throw new FoodCartException("In Food Cart Not Data found ");
+		throw new FoodCartException("In Food Cart Not  found ");
 		
 	}
 

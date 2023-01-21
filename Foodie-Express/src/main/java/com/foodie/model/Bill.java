@@ -36,13 +36,16 @@ public class Bill {
     public Bill() {
 		
 	}
-	public Bill(LocalDateTime time, Integer totalitems, Double totalCost, OrderDetails order) {
+	
+
+	public Bill(LocalDateTime billDate, Integer totalitems, Double totalCost, OrderDetails order) {
 		super();
-		this.time = time;
+		this.billDate = billDate;
 		this.totalitems = totalitems;
 		this.totalCost = totalCost;
 		this.order = order;
 	}
+
 
 	public Integer getBillid() {
 		return billid;
@@ -52,14 +55,14 @@ public class Bill {
 		this.billid = billid;
 	}
 
-	public LocalDateTime getTime() {
-		return time;
-	}
+	
 
-	public void setTime(LocalDateTime time) {
-		this.time = time;
+	public LocalDateTime getBillDate() {
+		return billDate;
 	}
-
+	public void setBillDate(LocalDateTime billDate) {
+		this.billDate = billDate;
+	}
 	public Integer getTotalitems() {
 		return totalitems;
 	}
@@ -84,11 +87,14 @@ public class Bill {
 		this.order = order;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Bill [billid=" + billid + ", time=" + time + ", totalitems=" + totalitems + ", totalCost=" + totalCost
-				+ ", order=" + order + "]";
+		return "Bill [billid=" + billid + ", billDate=" + billDate + ", totalitems=" + totalitems + ", totalCost="
+				+ totalCost + ", order=" + order + "]";
 	}
+
+	
     
     
     
