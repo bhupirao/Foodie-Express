@@ -7,9 +7,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,11 +39,27 @@ public class CategoryController {
 		
 		List<Category> list = categoryService.viewALlCategory();
 		
-		return new ResponseEntity<>(list,HttpStatus.CREATED);
+		return new ResponseEntity<>(list,HttpStatus.OK);
 		
 	}
 	
+	@PutMapping("/updateCategories/{id}")
+	public ResponseEntity<Category> updateCategoryHandler(@Valid @RequestBody Category category ,@PathVariable Integer id) {
+		
+		Category c1 = categoryService.updateCategory(category,id);
+		
+		return new ResponseEntity<>(c1,HttpStatus.CREATED);
+		
+	}
 	
+	@DeleteMapping("/deleteCategories/{id}")
+	public ResponseEntity<Category> deleteCategoryHandler(@Valid @PathVariable Integer id) {
+		
+		Category c1 = categoryService.removeCategory(id);
+		
+		return new ResponseEntity<>(c1,HttpStatus.OK);
+		
+	}
 	
 
 }

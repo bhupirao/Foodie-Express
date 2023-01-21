@@ -11,4 +11,8 @@ public interface CategoryService {
 	
 	public List<Category> viewALlCategory() throws CategoryException;
 
+	public Category updateCategory(Category category,Integer id) throws CategoryException;
+	
+	public Category removeCategory(Integer category_Id) throws CategoryException;
+	
 }
