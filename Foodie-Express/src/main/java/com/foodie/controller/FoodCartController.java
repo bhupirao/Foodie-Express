@@ -7,12 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodie.exception.FoodCartException;
-import com.foodie.exception.ItemException;
 import com.foodie.model.FoodCart;
+
 import com.foodie.model.Items;
 import com.foodie.repository.ItemRepository;
 import com.foodie.service.CartService;
@@ -27,6 +25,7 @@ public class FoodCartController {
 	private ItemRepository itemRepository;
 	
 	
+
 	@PostMapping("/addCart/{itemId}")
 	public ResponseEntity<FoodCart> addItemInCartHandler(  @RequestBody FoodCart cart,@PathVariable("itemId") Integer itemId) throws FoodCartException, ItemException{
 		
@@ -38,6 +37,7 @@ public class FoodCartController {
 		
 		
 	}
+
 	
 
 }

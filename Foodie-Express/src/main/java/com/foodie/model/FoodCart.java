@@ -22,8 +22,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 
 public class FoodCart {

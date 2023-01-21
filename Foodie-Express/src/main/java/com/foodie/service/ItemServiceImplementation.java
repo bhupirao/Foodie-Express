@@ -58,25 +58,25 @@ public class ItemServiceImplementation implements ItemService{
 //=========================================================================================================================================
 	@Override
 	public Items removeItem(Items item) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 //=========================================================================================================================================
 	@Override
 	public List<Items> viewAllCategory(Category category) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 //=========================================================================================================================================
 	@Override
 	public List<Items> viewAllRestaurant(Category category) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 //=========================================================================================================================================
 	@Override
 	public List<Items> viewAllItemsByItems(String Itemslist) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

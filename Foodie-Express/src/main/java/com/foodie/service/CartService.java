@@ -8,6 +8,7 @@ import com.foodie.model.Items;
 public interface CartService {
 
 	
+
 	public FoodCart addItemToCart(FoodCart cart,Integer itemId)throws FoodCartException, ItemException;
 	
 	public FoodCart increaseQuantity(FoodCart cart,Items item,Integer quantity)throws FoodCartException, ItemException;

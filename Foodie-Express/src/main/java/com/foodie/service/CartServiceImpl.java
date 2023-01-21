@@ -31,6 +31,7 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public FoodCart addItemToCart(FoodCart cart, Integer itemId) throws FoodCartException, ItemException {
 		
+
 		Optional<Customer> opt=customerRepository.findById(cart.getCustomer().getCustomerId());
 		
 		if(opt.isEmpty()) {
@@ -67,7 +68,7 @@ public class CartServiceImpl implements CartService{
     		foodCartRepository.save(cart);		
     		return cart;
              
-             
+            
 	}
 
 	@Override

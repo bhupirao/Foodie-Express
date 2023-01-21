@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Address {
 	
 	@Id
@@ -25,10 +25,13 @@ public class Address {
 	private String state;
 	private String country;
 	private String pincode;
+	
+	
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Address(Integer addressId, String buildingName, Integer streetNo, String area, String city, String state,
 			String country, String pincode) {
 		super();
