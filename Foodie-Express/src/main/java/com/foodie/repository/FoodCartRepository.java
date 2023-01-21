@@ -8,4 +8,5 @@ import com.foodie.model.FoodCart;
 @Repository
 public interface FoodCartRepository extends JpaRepository<FoodCart, Integer> {
 
+	//public FoodCart findByUserId(Integer customerId); 
 }

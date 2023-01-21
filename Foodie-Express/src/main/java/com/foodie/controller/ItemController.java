@@ -28,7 +28,7 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@PostMapping("/saveItem")
-	public ResponseEntity<String> saveItemHandler(@Valid @RequestBody Items item ) {
+	public ResponseEntity<String> saveItemHandler (@RequestBody Items item ) {
 		
 		String message = itemService.addItem(item);
 		
