@@ -10,9 +10,11 @@ public interface LoginService {
 
 	public String signIn(LoginDTO loginDto)throws LoginException;
 	
-	public  String signOut(Login login,String key)throws LoginException;
+    public  String signOut(Login login,String key)throws LoginException;
 	
 	public Login  createUser(Login login)throws LoginException;
 	
 	public Login  updateUser(Login login,String key)throws LoginException;
+	
+	
 }
