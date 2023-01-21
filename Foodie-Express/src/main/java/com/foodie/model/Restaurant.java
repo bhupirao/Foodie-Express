@@ -32,27 +32,32 @@ public class Restaurant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer restaurantId;
 	
-	@NotNull(message = "Restaurant Name is Mandatory ")
+//	@NotNull(message = "Restaurant Name is Mandatory ")
 	private String restaurantName;
 		
-	@NotNull(message = "Manager Name is Mandatory ")
+//	@NotNull(message = "Manager Name is Mandatory ")
 	private String managerName;
 	
-	@NotNull(message = "Contact Number is Mandatory ")
+//	@NotNull(message = "Contact Number is Mandatory ")
 	private String contactNumber;
 	
-	@NotNull(message = "Restaurant Address is Mandatory ")
+//	@NotNull(message = "Restaurant Address is Mandatory ")
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address; 
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL , mappedBy = "listOfRestaurants")
 	private List<Items> itemList = new ArrayList<>();
 
-	public Restaurant(Integer restaurantId, @NotNull(message = "Restaurant Name is Mandatory ") String restaurantName,
-			@NotNull(message = "Manager Name is Mandatory ") String managerName,
-			@NotNull(message = "Contact Number is Mandatory ") String contactNumber,
-			@NotNull(message = "Restaurant Address is Mandatory ") Address address, List<Items> itemList) {
+	public Restaurant() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Restaurant(Integer restaurantId, String restaurantName, String managerName, String contactNumber,
+			Address address, List<Items> itemList) {
 		super();
 		this.restaurantId = restaurantId;
 		this.restaurantName = restaurantName;
@@ -62,10 +67,19 @@ public class Restaurant {
 		this.itemList = itemList;
 	}
 
-	public Restaurant() {
-		super();
-		// TODO Auto-generated constructor stub
+
+
+	public Address getAddress() {
+		return address;
 	}
+
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
 
 	public Integer getRestaurantId() {
 		return restaurantId;
@@ -99,14 +113,6 @@ public class Restaurant {
 		this.contactNumber = contactNumber;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public List<Items> getItemList() {
 		return itemList;
 	}
@@ -114,6 +120,7 @@ public class Restaurant {
 	public void setItemList(List<Items> itemList) {
 		this.itemList = itemList;
 	}
+
 
 	@Override
 	public String toString() {

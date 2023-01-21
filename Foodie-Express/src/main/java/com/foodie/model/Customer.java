@@ -43,8 +43,8 @@ public class Customer {
 	private String email;
 	
 //	@NotNull(message = "Customer First Name is Mandatory ")
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@Autowired
 	private Address address;
 
 	public Customer() {

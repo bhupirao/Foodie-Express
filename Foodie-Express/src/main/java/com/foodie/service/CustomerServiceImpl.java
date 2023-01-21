@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.foodie.exception.CustomerException;
 import com.foodie.model.Customer;
-import com.foodie.model.Restaurant;
 import com.foodie.repository.CustomerRepository;
 
 

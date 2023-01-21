@@ -1,5 +1,6 @@
 package com.foodie.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Address {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer addressId;
 	private String buildingName;
 	private Integer streetNo;
@@ -25,14 +26,15 @@ public class Address {
 	private String state;
 	private String country;
 	private String pincode;
+	
+	
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Address(Integer addressId, String buildingName, Integer streetNo, String area, String city, String state,
-			String country, String pincode) {
+	public Address(String buildingName, Integer streetNo, String area, String city, String state, String country,
+			String pincode) {
 		super();
-		this.addressId = addressId;
 		this.buildingName = buildingName;
 		this.streetNo = streetNo;
 		this.area = area;
@@ -40,12 +42,6 @@ public class Address {
 		this.state = state;
 		this.country = country;
 		this.pincode = pincode;
-	}
-	public Integer getAddressId() {
-		return addressId;
-	}
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
 	}
 	public String getBuildingName() {
 		return buildingName;
@@ -91,10 +87,10 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", area=" + area + ", buildingName=" + buildingName + ", city="
-				+ city + ", country=" + country + ", pincode=" + pincode + ", state=" + state + ", streetNo=" + streetNo
-				+ "]";
+		return "Address [buildingName=" + buildingName + ", streetNo=" + streetNo + ", area=" + area + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", pincode=" + pincode + "]";
 	}
+
 	
 	
 }
