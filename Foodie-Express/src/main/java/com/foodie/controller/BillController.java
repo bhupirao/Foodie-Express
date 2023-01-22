@@ -39,7 +39,7 @@ public class BillController {
 	
 	
 	@DeleteMapping("/dbills/{id}")
-	 public ResponseEntity<Bill>  removeBillHandler(@PathVariable("id") @RequestBody Integer BillId) throws BillException{ 
+	 public ResponseEntity<Bill>  removeBillHandler(@PathVariable("id") Integer BillId) throws BillException{ 
 		 
 		 Bill deletedbill = bService.removeBill(BillId);
 		 return new ResponseEntity<Bill>(deletedbill, HttpStatus.OK);

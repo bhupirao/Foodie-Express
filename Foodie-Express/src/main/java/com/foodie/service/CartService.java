@@ -11,11 +11,11 @@ public interface CartService {
 
 	public FoodCart addItemToCart(FoodCart cart,Integer itemId)throws FoodCartException, ItemException;
 	
-	public FoodCart increaseQuantity(FoodCart cart,Items item,Integer quantity)throws FoodCartException, ItemException;
+	public FoodCart increaseQuantity(FoodCart cart,Integer itemId,Integer quantity)throws FoodCartException, ItemException;
 	
-	public FoodCart reduceQunatity(FoodCart cart,Items item,Integer quantity)throws FoodCartException, ItemException;
+	public FoodCart reduceQunatity(FoodCart cart,Integer itemId,Integer quantity)throws FoodCartException, ItemException;
 	
-	public FoodCart removeItem(FoodCart cart,Items item)throws FoodCartException, ItemException;
+	public FoodCart removeItem(FoodCart cart,Integer itemId)throws FoodCartException, ItemException;
 	
 	public FoodCart  clearCart(FoodCart cart)throws FoodCartException;
 }

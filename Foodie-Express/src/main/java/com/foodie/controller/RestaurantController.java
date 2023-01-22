@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodie.model.Address;
 import com.foodie.model.Restaurant;
 import com.foodie.service.RestaurantService;
 
@@ -68,12 +67,13 @@ public class RestaurantController {
 		
 	}
 	
-//	 Get Restaurant List By Location Controller By Id ------------------------------>
+//	 Get Restaurant List Controller  ------------------------------>
+	
 	
 	@GetMapping("/getRestaurantList")
-	public ResponseEntity<List<Restaurant>> getRestaurantList(@RequestBody Address location)
+	public ResponseEntity<List<Restaurant>> getRestaurantList()
 	{
-		List<Restaurant> restaurantList = restaurantService.viewNearByRestaurant(location);
+		List<Restaurant> restaurantList = restaurantService.viewAllRestaurant();
 		
 		return new ResponseEntity<>(restaurantList, HttpStatus.OK);
 	}

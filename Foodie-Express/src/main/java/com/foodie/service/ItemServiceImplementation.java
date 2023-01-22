@@ -185,31 +185,10 @@ public class ItemServiceImplementation implements ItemService{
 		}
 		
 		return list;
+	}
 		
 
-	public Items removeItem(Items item) {
-		
-		return null;
-	}
-//=========================================================================================================================================
-	@Override
-	public List<Items> viewAllCategory(Category category) {
-		
-		return null;
-	}
-//=========================================================================================================================================
-	@Override
-	public List<Items> viewAllRestaurant(Category category) {
-		
-		return null;
-	}
-//=========================================================================================================================================
-	@Override
-	public List<Items> viewAllItemsByItems(String Itemslist) {
-		
-		return null;
 
-	}
 	
 	
 	

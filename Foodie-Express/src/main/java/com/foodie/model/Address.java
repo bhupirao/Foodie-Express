@@ -33,8 +33,6 @@ public class Address {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(String buildingName, Integer streetNo, String area, String city, String state, String country,
-			String pincode) {
 
 	
 	public Address(Integer addressId, String buildingName, Integer streetNo, String area, String city, String state,

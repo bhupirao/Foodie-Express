@@ -76,27 +76,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 //	View Near By Restaurant details Implementation ------------------------------>		
-
 	@Override
-	public List<Restaurant> viewNearByRestaurant(Address location) throws RestaurantException {
-//		List<Restaurant> list = restaurantRepo.getRestaurantByLocation( location.getArea(), location.getBuildingName(), location.getCity(), location.getCountry(), location.getPincode(), location.getState(), location.getStreetNo());
-//		
-//		if(list.isEmpty()) throw new RestaurantException("There is no Restaurant");
-//		else return list;
+	public List<Restaurant> viewAllRestaurant() throws RestaurantException {
 		
-		return null;
+		List<Restaurant> restaurantList = restaurantRepo.findAll();
+		
+		return restaurantList;
 	}
 	
-
-	
-//	View Restaurant details By Name Implementation ------------------------------>		
-
-	@Override
-	public List<Restaurant> viewRestaurantByItemName(String name) throws RestaurantException {
-		
-		
-		
-		return null;
-	}
 
 }

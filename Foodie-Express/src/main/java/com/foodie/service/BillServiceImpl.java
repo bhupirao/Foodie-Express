@@ -94,7 +94,8 @@ public class BillServiceImpl implements BillService{
 		Optional<Bill> opt = bDao.findById(BillId);
 
 		if (opt.isPresent()) {
-			bDao.deleteById(BillId);
+			
+			bDao.delete(opt.get());
 			
 			return opt.get();
 

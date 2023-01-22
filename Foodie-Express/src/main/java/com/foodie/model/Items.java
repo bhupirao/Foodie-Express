@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,8 +43,8 @@ public class Items {
 //		@NotNull
 		private Integer costPerUnit;
 		
-		@JsonIgnore
-		@ManyToOne
+		
+		@ManyToOne(cascade = CascadeType.ALL)
 //		@Size(min = 3, max = 10, message = "Category name should 3 to 20")
 		private Category category;
 

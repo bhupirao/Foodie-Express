@@ -71,18 +71,19 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public FoodCart increaseQuantity(FoodCart cart, Items item, Integer quantity) throws FoodCartException, ItemException {
+	public FoodCart increaseQuantity(FoodCart cart,Integer itemId, Integer quantity) throws FoodCartException, ItemException {
 		
 
           Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
 		if(foodCart.isPresent()) {
+			
 			cart=foodCart.get();
 			List<Items> itemList = cart.getItemList();
 			boolean flag = true;
 			for (int i = 0; i < itemList.size(); i++) {
 				Items ele = itemList.get(i);
-				if (ele.getItemId() == item.getItemId()) {
+				if (ele.getItemId() == itemId) {
 					ele.setQuantity(ele.getQuantity() + quantity);
 					flag = false;
 				}
@@ -102,7 +103,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public FoodCart reduceQunatity(FoodCart cart, Items item, Integer quantity) throws FoodCartException, ItemException {
+	public FoodCart reduceQunatity(FoodCart cart, Integer itemId, Integer quantity) throws FoodCartException, ItemException {
 		
 
          
@@ -114,7 +115,7 @@ public class CartServiceImpl implements CartService{
 			boolean flag = true;
 			for (int i = 0; i < itemList.size(); i++) {
 				Items ele = itemList.get(i);
-				if (ele.getItemId() == item.getItemId()) {
+				if (ele.getItemId() == itemId) {
 					ele.setQuantity(ele.getQuantity() - quantity);
 					flag = false;
 				}
@@ -134,7 +135,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public FoodCart removeItem(FoodCart cart, Items item) throws FoodCartException, ItemException {
+	public FoodCart removeItem(FoodCart cart, Integer itemId) throws FoodCartException, ItemException {
 		
 		Optional<FoodCart> opt=foodCartRepository.findById(cart.getCartId());
 		if (opt.isPresent()) {
@@ -147,7 +148,7 @@ public class CartServiceImpl implements CartService{
 
 			for (int i = 0; i < itemList.size(); i++) {
 				Items ele = itemList.get(i);
-				if (ele.getItemId() == item.getItemId()) {
+				if (ele.getItemId() == itemId) {
 					flag = false;
 					getItem = ele;
 				}
@@ -173,9 +174,9 @@ public class CartServiceImpl implements CartService{
 		Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
 		if(foodCart.isPresent()) {
-			cart=foodCart.get();
-			cart.getItemList().clear();
-			return foodCartRepository.save(cart);
+			
+			foodCartRepository.delete(cart);
+			return cart;
 			 
 		}
 		throw new FoodCartException("In Food Cart Not  found ");
