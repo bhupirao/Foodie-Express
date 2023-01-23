@@ -14,10 +14,10 @@
  
 <h3 align=center>  Team Members </h3>
 
-- [Atul Singh Bhadouria](https://github.com/Satyajit0007)
-- [Bhoop Singh](https://github.com/Divya1327)
-- [Navneet Singh](https://github.com/Aasimsyed97)
-- [Nilesh Bind](https://github.com/piyushfromit)
+- [Atul Singh Bhadouria](https://github.com/atulsinghmbbs)
+- [Bhoop Singh](https://github.com/bhupirao)
+- [Navneet Singh](https://github.com/SinghNavneet17)
+- [Nilesh Bind](https://github.com/nilesh1996b)
 
 
 # AIM
