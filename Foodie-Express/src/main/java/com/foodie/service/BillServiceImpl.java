@@ -39,7 +39,6 @@ public class BillServiceImpl implements BillService{
 	public CustomerRepository cDao;
 
 	
-
 	@Autowired
 	private BillRepository billRepository;
 	
@@ -54,11 +53,12 @@ public class BillServiceImpl implements BillService{
 			if (opt.isPresent() && optC.isPresent()) {
 				OrderDetails orderDetails = opt.get();
 				Customer customerDetails = optC.get();
+				
+				
 				Bill bill = new Bill();
 				
 				bill.setBillDate(orderDetails.getOrderDate());
-				//bill.setCAddress(customerDetails.getAddress());
-				//bill.setCustomerName(customerDetails.getFirstName() + " " + customerDetails.getLastName());
+				
 
 				List<Items> listItems = orderDetails.getCart().getItemList();
 				double totalCost = 0;
@@ -68,7 +68,6 @@ public class BillServiceImpl implements BillService{
 					totalItem += i.getQuantity();
 				}
 				bill.setTotalCost(totalCost);
-
 				bill.setTotalitems(totalItem);
 				bill.setOrder(orderDetails);
 

@@ -41,58 +41,58 @@ public class OrderDetails {
 	@OneToOne(cascade = CascadeType.ALL)
 	public FoodCart cart;
 	
-	
-	public OrderDetails() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public OrderDetails(LocalDateTime orderDate,
-			@NonNull @NotBlank @NotEmpty @Size(min = 3, max = 10, message = "Order Status should 3 to 10") OrderStatus orderstatus,
-			FoodCart cart) {
-		super();
-		this.orderDate = orderDate;
-		this.orderstatus = orderstatus;
-		this.cart = cart;
-	}
-
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-
-	public LocalDateTime getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(LocalDateTime orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public OrderStatus getOrderstatus() {
-		return orderstatus;
-	}
-
-	public void setOrderstatus(OrderStatus orderstatus) {
-		this.orderstatus = orderstatus;
-	}
-
-	public FoodCart getCart() {
-		return cart;
-	}
-
-	public void setCart(FoodCart cart) {
-		this.cart = cart;
-	}
-
-	@Override
-	public String toString() {
-		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + ", orderstatus=" + orderstatus
-				+ ", cart=" + cart + "]";
-	}
-	
+//	
+//	public OrderDetails() {
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public OrderDetails(LocalDateTime orderDate,
+//			@NonNull @NotBlank @NotEmpty @Size(min = 3, max = 10, message = "Order Status should 3 to 10") OrderStatus orderstatus,
+//			FoodCart cart) {
+//		super();
+//		this.orderDate = orderDate;
+//		this.orderstatus = orderstatus;
+//		this.cart = cart;
+//	}
+//
+//	public Integer getOrderId() {
+//		return orderId;
+//	}
+//
+//	public void setOrderId(Integer orderId) {
+//		this.orderId = orderId;
+//	}
+//
+//	public LocalDateTime getOrderDate() {
+//		return orderDate;
+//	}
+//
+//	public void setOrderDate(LocalDateTime orderDate) {
+//		this.orderDate = orderDate;
+//	}
+//
+//	public OrderStatus getOrderstatus() {
+//		return orderstatus;
+//	}
+//
+//	public void setOrderstatus(OrderStatus orderstatus) {
+//		this.orderstatus = orderstatus;
+//	}
+//
+//	public FoodCart getCart() {
+//		return cart;
+//	}
+//
+//	public void setCart(FoodCart cart) {
+//		this.cart = cart;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "OrderDetails [orderId=" + orderId + ", orderDate=" + orderDate + ", orderstatus=" + orderstatus
+//				+ ", cart=" + cart + "]";
+//	}
+//	
 	
 	
 }

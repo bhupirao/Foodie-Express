@@ -33,62 +33,62 @@ public class Category {
 	private List<Items> itemList= new ArrayList<>();
 
 
-	public Category() {
-		// TODO Auto-generated constructor stub
-	}
-	
-
-
-	public Category(Integer category_id, String categoryName, List<Items> itemList) {
-		super();
-		this.category_id = category_id;
-		this.categoryName = categoryName;
-		this.itemList = itemList;
-	}
-
-
-
-	public Integer getCategory_id() {
-		return category_id;
-	}
-
-
-	public void setCategory_id(Integer category_id) {
-		this.category_id = category_id;
-	}
-
-
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
-
-
-	public List<Items> getItemList() {
-		return itemList;
-	}
-
-
-
-	public void setItemList(List<Items> itemList) {
-		this.itemList = itemList;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Category [category_id=" + category_id + ", categoryName=" + categoryName + ", itemList=" + itemList
-				+ "]";
-	}
-
-
-	
+//	public Category() {
+//		// TODO Auto-generated constructor stub
+//	}
+//	
+//
+//
+//	public Category(Integer category_id, String categoryName, List<Items> itemList) {
+//		super();
+//		this.category_id = category_id;
+//		this.categoryName = categoryName;
+//		this.itemList = itemList;
+//	}
+//
+//
+//
+//	public Integer getCategory_id() {
+//		return category_id;
+//	}
+//
+//
+//	public void setCategory_id(Integer category_id) {
+//		this.category_id = category_id;
+//	}
+//
+//
+//	public String getCategoryName() {
+//		return categoryName;
+//	}
+//
+//
+//	public void setCategoryName(String categoryName) {
+//		this.categoryName = categoryName;
+//	}
+//
+//
+//
+//	public List<Items> getItemList() {
+//		return itemList;
+//	}
+//
+//
+//
+//	public void setItemList(List<Items> itemList) {
+//		this.itemList = itemList;
+//	}
+//
+//
+//
+//	@Override
+//	public String toString() {
+//		return "Category [category_id=" + category_id + ", categoryName=" + categoryName + ", itemList=" + itemList
+//				+ "]";
+//	}
+//
+//
+//	
 
 
 
