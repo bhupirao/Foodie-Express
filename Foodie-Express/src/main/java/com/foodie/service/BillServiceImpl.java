@@ -42,8 +42,11 @@ public class BillServiceImpl implements BillService{
 	@Autowired
 	private BillRepository billRepository;
 	
+	
+	
+	
+	
 	@Override
-
 	public Bill addBill(Integer orderId , String uniqueId) throws BillException, LoginException {
 		
 		LoginSession cs = cSDao.findByUuid(uniqueId);
