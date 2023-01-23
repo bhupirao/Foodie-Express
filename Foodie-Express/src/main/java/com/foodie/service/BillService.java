@@ -4,15 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.foodie.exception.BillException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Bill;
 
 public interface BillService {
 
-	public Bill addBill(Integer orderId , String uniqueId) throws BillException;
+	public Bill addBill(Integer orderId , String uniqueId) throws BillException,LoginException;
 
-	public Bill removeBill(Integer BillId) throws BillException;
+	public Bill removeBill(Integer BillId,String uniqueId) throws BillException,LoginException;
 
-	public Bill updateBill(Bill bill) throws BillException;
+	public Bill updateBill(Bill bill,String uniqueId) throws BillException,LoginException;
 
 	public Bill viewBill(Integer BillId) throws BillException;
 

@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.foodie.exception.CategoryException;
 import com.foodie.exception.ItemException;
+import com.foodie.exception.LoginException;
 import com.foodie.exception.RestaurantException;
 import com.foodie.model.Category;
 import com.foodie.model.Items;
+import com.foodie.model.LoginSession;
 import com.foodie.model.Restaurant;
 import com.foodie.repository.CategoryRepository;
 import com.foodie.repository.ItemRepository;
+import com.foodie.repository.LoginSessionRepository;
 import com.foodie.repository.RestaurantRepository;
 
 @Service
@@ -29,19 +32,24 @@ public class ItemServiceImplementation implements ItemService{
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	
+	@Autowired
+	private LoginSessionRepository cSDao;
 //=========================================================================================================================================
 	@Override
-	public String addItem(Items items) {
+	public String addItem(Items items,String key) throws LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		itemRepository.save(items);
 		
 		return "Item has been SAVED";
+		}throw new LoginException("Key wrong please check");
 	}
 //=========================================================================================================================================
 	@Override
-	public Items updateItems(Items item, Integer item_Id)throws ItemException {
-		
+	public Items updateItems(Items item, Integer item_Id,String key)throws ItemException ,LoginException{
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		Optional<Items> optional =itemRepository.findById(item_Id);
 
 		if(optional.isPresent()) {
@@ -62,6 +70,8 @@ public class ItemServiceImplementation implements ItemService{
 			throw new ItemException("No Item with this Id EXIST");
 
 		}
+		}
+		throw new LoginException("Key wrong please check");
 		
 	}
 //=========================================================================================================================================
@@ -89,7 +99,10 @@ public class ItemServiceImplementation implements ItemService{
 //=========================================================================================================================================
 	@Override
 
-	public Items removeItem(Integer item_id) {
+	public Items removeItem(Integer item_id,String key) throws LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
+	
 		
 		Optional<Items> optional = itemRepository.findById(item_id);
 		
@@ -107,6 +120,7 @@ public class ItemServiceImplementation implements ItemService{
 			throw new ItemException(" No Item with Item_Id "+item_id+"FOUND");
 
 		}
+	}throw new LoginException("Key wrong please check");
 		
 	}
 //=========================================================================================================================================

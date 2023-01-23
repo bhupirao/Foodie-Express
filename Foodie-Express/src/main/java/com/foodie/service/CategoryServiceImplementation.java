@@ -8,22 +8,31 @@ import org.springframework.stereotype.Service;
 
 import com.foodie.exception.CategoryException;
 import com.foodie.exception.ItemException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Category;
 import com.foodie.model.Items;
+import com.foodie.model.LoginSession;
 import com.foodie.repository.CategoryRepository;
 import com.foodie.repository.ItemRepository;
+import com.foodie.repository.LoginSessionRepository;
 @Service
 public class CategoryServiceImplementation implements CategoryService {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private LoginSessionRepository cSDao;
 
 	@Override
-	public String addCategory(Category category) {
+	public String addCategory(Category category,String key) throws LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		categoryRepository.save(category);
 		
 		return "New Category ADDED ";
+		}throw new LoginException("key invalid please check it");
 	}
 
 	@Override
@@ -45,8 +54,9 @@ public class CategoryServiceImplementation implements CategoryService {
 	}
 
 	@Override
-	public Category updateCategory(Category category ,Integer id)  throws CategoryException {
-
+	public Category updateCategory(Category category ,Integer id,String key)  throws CategoryException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		Optional<Category> optional =	categoryRepository.findById(id);
 
 		if(optional.isPresent()) {
@@ -61,13 +71,14 @@ public class CategoryServiceImplementation implements CategoryService {
 
 			throw new CategoryException("No such Category EXIST");
 
-		}
+		}}throw new LoginException("key invalid please check it");
 			
 	}
 
 	@Override
-	public Category removeCategory(Integer category_Id) throws CategoryException {
-		
+	public Category removeCategory(Integer category_Id,String key) throws CategoryException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		
 		Optional<Category> optional =	categoryRepository.findById(category_Id);
@@ -82,7 +93,9 @@ public class CategoryServiceImplementation implements CategoryService {
 			
 		}else {
 			throw new CategoryException("No such Category EXIST");
-		}
+		}}throw new LoginException("key invalid please check it");
 	}
+	
+	
 
 }

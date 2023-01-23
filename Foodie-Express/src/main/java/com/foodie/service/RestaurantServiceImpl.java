@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodie.exception.CustomerException;
+import com.foodie.exception.LoginException;
 import com.foodie.exception.RestaurantException;
 import com.foodie.model.Address;
+import com.foodie.model.LoginSession;
 import com.foodie.model.Restaurant;
+import com.foodie.repository.LoginSessionRepository;
 import com.foodie.repository.RestaurantRepository;
 
 @Service
@@ -20,11 +23,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private RestaurantRepository restaurantRepo;
 	
+	@Autowired
+	private LoginSessionRepository cSDao;
 	
 //	Add Restaurant Implementation ------------------------------>
 
 	@Override
-	public Restaurant addRestaurant(Restaurant res) throws RestaurantException {
+	public Restaurant addRestaurant(Restaurant res,String key) throws RestaurantException, LoginException {
+		
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		Restaurant resto = restaurantRepo.save(res);
 		
@@ -32,12 +40,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 		{
 		return resto;
 		}else throw new RestaurantException("Restaurant Not Added");
+		}throw new LoginException("Key wrong please check");
 	}
 	
 //	Update Restaurant details Implementation ------------------------------>
 
 	@Override
-	public Restaurant updateRestaurant(Restaurant res) throws RestaurantException {
+	public Restaurant updateRestaurant(Restaurant res,String key) throws RestaurantException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		Optional<Restaurant> opt = restaurantRepo.findById(res.getRestaurantId());
 		
 		if(opt.isPresent())
@@ -46,12 +57,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 			return updatedRestaurant;
 		}else
 			throw new CustomerException("There is no customer register with customer Id " + res.getRestaurantId());
+		}throw new LoginException("Key wrong please check");
 	}
 	
 //	Remove Restaurant details Implementation ------------------------------>	
 
 	@Override
-	public Restaurant removeRestaurant(Integer id) throws RestaurantException {
+	public Restaurant removeRestaurant(Integer id,String key) throws RestaurantException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		Optional<Restaurant> opt = restaurantRepo.findById(id);
 		
 		if(opt.isEmpty()) throw new RestaurantException("There is no Restaurant By Restaurant Id Number " + id);
@@ -60,6 +74,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		restaurantRepo.delete(deletedRest);
 		return deletedRest;
 		}
+		}throw new LoginException("Key wrong please check");
 	}
 
 //	View Restaurant details Implementation ------------------------------>	

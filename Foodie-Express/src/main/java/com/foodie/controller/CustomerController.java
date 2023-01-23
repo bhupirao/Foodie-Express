@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.foodie.exception.CustomerException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Customer;
 import com.foodie.service.CustomerService;
 
@@ -32,28 +34,28 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/customerReg")
-	public ResponseEntity<Customer> registerCustomer(@Valid @RequestBody Customer customer)
+	public ResponseEntity<Customer> registerCustomer(@Valid @RequestBody Customer customer,@RequestParam String key) throws CustomerException, LoginException
 	{
-		Customer addedCustomer = customerService.addCustomer(customer);
+		Customer addedCustomer = customerService.addCustomer(customer,key);
 		
 		return new ResponseEntity<>(addedCustomer,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/updateCustomerById")
-	public ResponseEntity<Customer> updatedCustomerById(@RequestBody Customer customer)
+	public ResponseEntity<Customer> updatedCustomerById(@RequestBody Customer customer,@RequestParam String key) throws CustomerException, LoginException
 	{
 		
-		Customer updatedCustomer = customerService.updateCustomer(customer);
+		Customer updatedCustomer = customerService.updateCustomer(customer,key);
 		
 		return new ResponseEntity<>(updatedCustomer,HttpStatus.ACCEPTED);
 		
 	}
 	
 	@DeleteMapping("/deleteCustomerById/{id}")
-	public ResponseEntity<Customer> deleteCustomerById(@PathVariable("id") Integer id)
+	public ResponseEntity<Customer> deleteCustomerById(@PathVariable("id") Integer id,@RequestParam String key) throws CustomerException, LoginException
 	{
 		
-		Customer deletedCustomer = customerService.removeCustomer(id);
+		Customer deletedCustomer = customerService.removeCustomer(id,key);
 		
 		return new ResponseEntity<>(deletedCustomer,HttpStatus.ACCEPTED);
 		

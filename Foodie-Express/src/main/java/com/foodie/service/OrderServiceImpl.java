@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodie.exception.FoodCartException;
+import com.foodie.exception.LoginException;
 import com.foodie.exception.OrderException;
 import com.foodie.model.Customer;
 import com.foodie.model.FoodCart;
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
 	private OrderRepository orderRepo;
 	
 	@Autowired
-	private LoginSessionRepository loginsession;
+	private LoginSessionRepository cSDao;
 
 	@Autowired
 	private FoodCartRepository foodRepo ;
@@ -38,11 +39,11 @@ public class OrderServiceImpl implements OrderService{
 	private RestaurantRepository restaurantrepo;
 
 	@Override
-	public OrderDetails addOrder(Integer cartId, String uniqueId) throws OrderException, FoodCartException {
+	public OrderDetails addOrder(Integer cartId, String uniqueId) throws OrderException, FoodCartException, LoginException {
 		
-		LoginSession cs = loginsession.findByUuid(uniqueId);
-		
+		LoginSession cs = cSDao.findByUuid(uniqueId);
 		if (cs != null) {
+		
 			FoodCart foodCart = foodRepo.findById(cartId).get();
 			 
 			if (foodCart != null) {
@@ -56,14 +57,13 @@ public class OrderServiceImpl implements OrderService{
 			} else {
 				throw new FoodCartException("No item found in your cart");
 			}
-		} else {
-			throw new OrderException("customer is not logged in");
-		}
+		}throw new LoginException("Invalid key please check it");
+		
 		
 	}
 
 	@Override
-	public OrderDetails removeOrder(Integer orderId) throws OrderException {
+	public OrderDetails removeOrder(Integer orderId,String uniqueId ) throws OrderException {
 		
 		Optional<OrderDetails> opt = orderRepo.findById(orderId);
 
@@ -80,9 +80,10 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public OrderDetails updateOrder(OrderDetails order) throws OrderException {
+	public OrderDetails updateOrder(OrderDetails order,String key) throws OrderException, LoginException {
 		
-		
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		Optional<OrderDetails> opt = orderRepo.findById(order.getOrderId());
 		OrderDetails updatedOrder = null;
 		if (opt.isPresent()) {
@@ -93,6 +94,8 @@ public class OrderServiceImpl implements OrderService{
 		}
 
 		return updatedOrder;
+		}
+		throw new LoginException("Invalid key please check it");
 		
 
 	}

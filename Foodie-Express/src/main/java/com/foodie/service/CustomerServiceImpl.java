@@ -6,9 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.foodie.exception.BillException;
 import com.foodie.exception.CustomerException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Customer;
+import com.foodie.model.LoginSession;
 import com.foodie.repository.CustomerRepository;
+import com.foodie.repository.LoginSessionRepository;
 
 
 @Service
@@ -16,11 +20,15 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerRepository customerRepo;
+	
+	@Autowired
+	private LoginSessionRepository cSDao;
 
 	
 	@Override
-	public Customer addCustomer(Customer customer) throws CustomerException {
-		
+	public Customer addCustomer(Customer customer,String key) throws CustomerException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		Customer cust = customerRepo.save(customer);
 		
@@ -29,11 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
 		return cust;
 		}else throw new CustomerException("Customer Not Added");
 		
-		
+		}throw new LoginException("Key wrong please check");
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) throws CustomerException {
+	public Customer updateCustomer(Customer customer,String key) throws CustomerException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
+		
 		Optional<Customer> opt = customerRepo.findById(customer.getCustomerId());
 		
 		if(opt.isPresent())
@@ -42,12 +53,16 @@ public class CustomerServiceImpl implements CustomerService {
 			return updatedCustomer;
 		}else
 			throw new CustomerException("There is no customer register with customer Id " + customer.getCustomerId());
-		
+		}
+		throw new LoginException("Key wrong please check");
 		
 	}
 
 	@Override
-	public Customer removeCustomer(Integer id) throws CustomerException {
+	public Customer removeCustomer(Integer id,String key) throws CustomerException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
+		
 		
 		Optional<Customer> opt = customerRepo.findById(id);
 		
@@ -57,6 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepo.delete(deletedCust);
 		return deletedCust;
 		}
+		}throw new LoginException("Key wrong please check");
 		
 	}
 

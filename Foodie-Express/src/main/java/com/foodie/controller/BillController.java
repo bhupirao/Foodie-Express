@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.foodie.exception.BillException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Bill;
 import com.foodie.service.BillService;
 
@@ -28,7 +29,7 @@ public class BillController {
 
 	@PostMapping("/addBill/{orderId}/{uniqueId}")
 	public ResponseEntity<Bill> addBill(@PathVariable("orderId") Integer orderId,
-			@PathVariable("uniqueId") String uniqueId) throws BillException
+			@PathVariable("uniqueId") String uniqueId) throws BillException, LoginException
 	{
 
 		Bill savedBill = bService.addBill(orderId, uniqueId);
@@ -39,9 +40,9 @@ public class BillController {
 	
 	
 	@DeleteMapping("/dbills/{id}")
-	 public ResponseEntity<Bill>  removeBillHandler(@PathVariable("id") Integer BillId) throws BillException{ 
+	 public ResponseEntity<Bill>  removeBillHandler(@PathVariable("id") Integer BillId,@RequestParam String key) throws BillException, LoginException{ 
 		 
-		 Bill deletedbill = bService.removeBill(BillId);
+		 Bill deletedbill = bService.removeBill(BillId,key);
 		 return new ResponseEntity<Bill>(deletedbill, HttpStatus.OK);
 	 }
 	
@@ -56,8 +57,8 @@ public class BillController {
 	  
 		
 	 @PutMapping("/bills")
-	 public ResponseEntity<Bill>updateBillHandler(@RequestBody Bill  bill) throws BillException{ 
-		 Bill updatedbill = bService.updateBill(bill);
+	 public ResponseEntity<Bill>updateBillHandler(@RequestBody Bill  bill,@RequestParam String key) throws BillException, LoginException{ 
+		 Bill updatedbill = bService.updateBill(bill,key);
 		 return new ResponseEntity<Bill>(updatedbill,HttpStatus.ACCEPTED);
 	 } 
 

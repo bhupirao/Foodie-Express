@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodie.exception.ItemException;
+import com.foodie.exception.LoginException;
 import com.foodie.exception.RestaurantException;
 import com.foodie.model.Category;
 import com.foodie.model.Items;
@@ -28,9 +31,9 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@PostMapping("/saveItem")
-	public ResponseEntity<String> saveItemHandler (@RequestBody Items item ) {
+	public ResponseEntity<String> saveItemHandler (@RequestBody Items item,@RequestParam String key ) throws LoginException {
 		
-		String message = itemService.addItem(item);
+		String message = itemService.addItem(item,key);
 		
 		return new ResponseEntity<>(message,HttpStatus.CREATED);
 		
@@ -46,18 +49,18 @@ public class ItemController {
 	}
 	
 	@DeleteMapping("/deleteItem/{id}")
-	public ResponseEntity<Items> deleteItemHandler(@PathVariable Integer id ) {
+	public ResponseEntity<Items> deleteItemHandler(@PathVariable Integer id ,@RequestParam String key ) throws LoginException {
 		
-		Items item = itemService.removeItem(id);
+		Items item = itemService.removeItem(id,key);
 		
 		return new ResponseEntity<>(item,HttpStatus.OK);
 		
 	}
 	
 	@PutMapping("/updateItem/{id}")
-	public ResponseEntity<Items> updateCategoryHandler(@Valid @RequestBody Items item ,@PathVariable Integer id) {
+	public ResponseEntity<Items> updateCategoryHandler(@Valid @RequestBody Items item ,@PathVariable Integer id,@RequestParam String key) throws ItemException, LoginException {
 		
-		Items c1 = itemService.updateItems(item,id);
+		Items c1 = itemService.updateItems(item,id,key);
 		
 		return new ResponseEntity<>(c1,HttpStatus.CREATED);
 		

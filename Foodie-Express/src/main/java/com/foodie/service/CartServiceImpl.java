@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import com.foodie.exception.CustomerException;
 import com.foodie.exception.FoodCartException;
 import com.foodie.exception.ItemException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Customer;
 import com.foodie.model.FoodCart;
 import com.foodie.model.Items;
+import com.foodie.model.LoginSession;
 import com.foodie.repository.CustomerRepository;
 import com.foodie.repository.FoodCartRepository;
 import com.foodie.repository.ItemRepository;
+import com.foodie.repository.LoginSessionRepository;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -26,9 +29,13 @@ public class CartServiceImpl implements CartService{
 	private ItemRepository itemRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired 
+	private LoginSessionRepository cSDao;
 
 	@Override
 	public FoodCart addItemToCart(FoodCart cart, Integer itemId) throws FoodCartException, ItemException {
+		
 		
 
 		Optional<Customer> opt=customerRepository.findById(cart.getCustomer().getCustomerId());
@@ -135,7 +142,9 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public FoodCart removeItem(FoodCart cart, Integer itemId) throws FoodCartException, ItemException {
+	public FoodCart removeItem(FoodCart cart, Integer itemId,String key) throws FoodCartException, ItemException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		Optional<FoodCart> opt=foodCartRepository.findById(cart.getCartId());
 		if (opt.isPresent()) {
@@ -164,12 +173,14 @@ public class CartServiceImpl implements CartService{
 		} else {
 			throw new FoodCartException("Food Cart not found!");
 		}
-		
+		}throw new LoginException("Key Invalid please check it");
 		
 	}
 
 	@Override
-	public FoodCart clearCart(FoodCart cart) throws FoodCartException {
+	public FoodCart clearCart(FoodCart cart,String key) throws FoodCartException, LoginException {
+		LoginSession cs = cSDao.findByUuid(key);
+		if (cs != null) {
 		
 		Optional<FoodCart> foodCart=foodCartRepository.findById(cart.getCartId());
 		
@@ -180,7 +191,9 @@ public class CartServiceImpl implements CartService{
 			 
 		}
 		throw new FoodCartException("In Food Cart Not  found ");
-		
+		}
+	
+	throw new LoginException("Key Invalid please check it");
 	}
 
 }

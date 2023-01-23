@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.foodie.exception.LoginException;
+import com.foodie.exception.RestaurantException;
 import com.foodie.model.Restaurant;
 import com.foodie.service.RestaurantService;
 
@@ -27,18 +30,18 @@ public class RestaurantController {
 //	Add Restaurant Controller ------------------------------>
 	
 	@PostMapping("/addRestaurant")
-	public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant)
+	public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant,@RequestParam String key) throws RestaurantException, LoginException
 	{
-		Restaurant rest = restaurantService.addRestaurant(restaurant);
+		Restaurant rest = restaurantService.addRestaurant(restaurant,key);
 		return new ResponseEntity<>(rest,HttpStatus.CREATED);
 	}
 	
 //	Updated Restaurant Controller ------------------------------>
 	
 	@PutMapping("/updateRestaurant")
-	public ResponseEntity<Restaurant> updateRestaurantById(@RequestBody Restaurant res)
+	public ResponseEntity<Restaurant> updateRestaurantById(@RequestBody Restaurant res,@RequestParam String key) throws RestaurantException, LoginException
 	{
-		Restaurant updatedRestaurant = restaurantService.updateRestaurant(res);
+		Restaurant updatedRestaurant = restaurantService.updateRestaurant(res,key);
 		
 		return new ResponseEntity<>(updatedRestaurant, HttpStatus.ACCEPTED);
 	}
@@ -46,10 +49,10 @@ public class RestaurantController {
 //	Delete Restaurant Controller ------------------------------>
 	
 	@DeleteMapping("/deleteRestaurantById/{id}")
-	public ResponseEntity<Restaurant> deleteRestaurantById(@PathVariable("id") Integer id)
+	public ResponseEntity<Restaurant> deleteRestaurantById(@PathVariable("id") Integer id,@RequestParam String key) throws RestaurantException, LoginException
 	{
 		
-		Restaurant deletedRestaurant = restaurantService.removeRestaurant(id);
+		Restaurant deletedRestaurant = restaurantService.removeRestaurant(id,key);
 		
 		return new ResponseEntity<>(deletedRestaurant,HttpStatus.ACCEPTED);
 		

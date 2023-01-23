@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.foodie.exception.FoodCartException;
 import com.foodie.exception.ItemException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.FoodCart;
 import com.foodie.service.CartService;
 
@@ -50,18 +50,18 @@ public class FoodCartController {
 	}
 	
 	@DeleteMapping("/deleteIitem")
-	public ResponseEntity<FoodCart> removeItemHandler(@RequestBody FoodCart cart,@RequestParam Integer itemId)throws ItemException, FoodCartException {
+	public ResponseEntity<FoodCart> removeItemHandler(@RequestBody FoodCart cart,@RequestParam Integer itemId,@RequestParam String key)throws ItemException, FoodCartException, LoginException {
 		
-		FoodCart removeItem = cartService.removeItem(cart, itemId);
+		FoodCart removeItem = cartService.removeItem(cart, itemId,key);
 		
 		return new ResponseEntity<FoodCart>(removeItem, HttpStatus.OK);
 		
 	}
 
 	@DeleteMapping("/deleteCart")
-	public ResponseEntity<FoodCart> clearCartHandler(@RequestBody FoodCart cart) throws FoodCartException {
+	public ResponseEntity<FoodCart> clearCartHandler(@RequestBody FoodCart cart, @RequestParam String key) throws FoodCartException, LoginException {
 		
-		FoodCart clearCart =cartService.clearCart(cart);
+		FoodCart clearCart =cartService.clearCart(cart,key);
 		
 		return new ResponseEntity<FoodCart>(clearCart, HttpStatus.OK);
 	}

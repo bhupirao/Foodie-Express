@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodie.exception.BillException;
+import com.foodie.exception.LoginException;
 import com.foodie.model.Bill;
 
 import com.foodie.model.Customer;
@@ -44,7 +45,7 @@ public class BillServiceImpl implements BillService{
 	
 	@Override
 
-	public Bill addBill(Integer orderId , String uniqueId) throws BillException {
+	public Bill addBill(Integer orderId , String uniqueId) throws BillException, LoginException {
 		
 		LoginSession cs = cSDao.findByUuid(uniqueId);
 		if (cs != null) {
@@ -78,7 +79,7 @@ public class BillServiceImpl implements BillService{
 			}
 
 		} else {
-			throw new BillException("Customer is not logged in");
+			throw new LoginException("Customer is not logged in");
 		}
 
 	}
@@ -88,8 +89,9 @@ public class BillServiceImpl implements BillService{
 		
 
 	@Override
-	public Bill removeBill(Integer BillId) throws BillException {
-
+	public Bill removeBill(Integer BillId,String uniqueId) throws BillException, LoginException {
+		LoginSession cs = cSDao.findByUuid(uniqueId);
+		if (cs != null) {
 	
 		Optional<Bill> opt = bDao.findById(BillId);
 
@@ -102,17 +104,15 @@ public class BillServiceImpl implements BillService{
 		} else {
 			throw new BillException("No bill found by ");
 		}
-
-		
-
-		
-		
+		}throw new LoginException("Customer is not logged in");
+	
 
 	}
 
 	@Override
-	public Bill updateBill(Bill bill) throws BillException {
-
+	public Bill updateBill(Bill bill,String uniqueId) throws BillException, LoginException {
+		LoginSession cs = cSDao.findByUuid(uniqueId);
+		if (cs != null) {
 		
 		Optional<Bill> opt = bDao.findById(bill.getBillid());
 		Bill uBill = null;
@@ -124,6 +124,9 @@ public class BillServiceImpl implements BillService{
 		}
 
 		return uBill;
+	}
+		throw new LoginException("Customer is not logged in");
+	
 
 	}
 	
