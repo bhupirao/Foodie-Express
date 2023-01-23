@@ -2,7 +2,7 @@
 
 
 <h1 align=center>Foodie Express</h1>
-<div align=center><img  src="./Logo/Foodu.png"></div>
+<div align=center><img  src="/FoodieExpress.png"></div>
 <h3 align=center>  Wellcome To Foodie express App </h3>
 # REST API for an Online Food Application
 
