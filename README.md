@@ -54,7 +54,9 @@
 - FoodCart Module
 - Order and Bill Module
 
+# ER Diagram
 
+ <img src="/Logo/Database-Schema-Foodie-Schemassaa.jpg">
 
 # Features
 
